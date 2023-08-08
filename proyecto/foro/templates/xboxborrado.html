@@ -11,11 +11,11 @@
 <br>
 <br>
 
-{% if user.is_authenticated and user == juego.usuario %}
+{% if user.is_authenticated and user == xbox.usuario %}
 <div class="container text-center">
 
 <form method="post">{% csrf_token %}
-    <h4>¿Estás seguro(a) de que deseas eliminar el juego "{{ juego.titulo }}"?</h4>
+    <h4>¿Estás seguro(a) de que deseas eliminar la publicacion: "{{ xbox.titulo }}"?</h4>
     <p>
         <button type="submit" class="btn btn-danger">Eliminar</button>
     </p>

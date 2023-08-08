@@ -1,11 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    ps4 detalle
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+    <p><h4>{{ ps4.titulo }}</h4></p>
+    {% if ps4.imagen %}
+        <p><img src="{{ ps4.imagen.url }}" alt="" class="max-width-400"></p>
+    {% endif %}
+    {% if user.is_authenticated and user == ps4.usuario %}
+        <div class="btn-group" role="group" aria-label="Botones de Acción">
+            <a href="{% url 'ps4edicion' ps4.pk %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i> Editar</a>
+            <a href="{% url 'ps4borrado' ps4.pk %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
+        </div>
+    {% endif %}
+    <hr>
+    <p>Consola: {{ ps4.consola }}</p>
+    <p>Producto: {{ ps4.producto }}</p>
+    <p>Descripción: {{ ps4.descripcion }}</p>
+    <p>Año: {{ ps4.año }}</p>
+    <p>Precio(US$): {{ ps4.precio }}</p>
+</div>
+
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+        {% if not ps4.comentarios.all %}
+            No hay comentarios para este producto
+        {% else %}
+            {% for comentario in ps4.comentarios.all %}
+                <p><strong>{{ comentario.nombre }}</strong></p>
+                <p>{{ comentario.mensaje }}</p>
+                <p><small>{{ comentario.fechaComentario }}</small></p>
+                <hr>
+            {% endfor %}
+        {% endif %}
+        <a href="{% url 'comentario' ps4.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+
+<style>
+    .max-width-400 {
+        max-width: 400px;
+    }
+</style>
+
+<br>
+{% endblock %}
