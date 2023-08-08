@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>comentario</title>
-</head>
-<body>
-    comentario
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+    <h1>Agrega un Comentario</h1>
+</div>
+<div class="container">
+    <div class="form-group">
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+<br>
+{% endblock %}

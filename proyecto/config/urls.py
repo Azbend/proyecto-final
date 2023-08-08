@@ -31,18 +31,18 @@ urlpatterns = [
     path('pcDetalle/<int:pk>/', PcDetalle.as_view(), name='pcdetalle'),
     path('otrodetalle/<int:pk>/', OtroDetalle.as_view(), name='otrodetalle'),
 
-    path('xboxEdicion/<int:pk>/', XboxUpdate.as_view(), name='xbox_editar'),
-    path('switchEdicion/<int:pk>/', SwitchUpdate.as_view(), name='switch_editar'),
-    path('ps4Edicion/<int:pk>/', Ps4Update.as_view(), name='ps4_editar'),
-    path('pcEdicion/<int:pk>/', PCUpdate.as_view(), name='pc_editar'),
-    path('otroEdicion/<int:pk>/', OtroUpdate.as_view(), name='otro_editar'),
+    path('xboxEdicion/<int:pk>/', XboxUpdate.as_view(), name='xboxedicion'),
+    path('switchEdicion/<int:pk>/', SwitchUpdate.as_view(), name='switchedicion'),
+    path('ps4Edicion/<int:pk>/', Ps4Update.as_view(), name='ps4edicion'),
+    path('pcEdicion/<int:pk>/', PCUpdate.as_view(), name='pcedicion'),
+    path('otroEdicion/<int:pk>/', OtroUpdate.as_view(), name='otroedicion'),
 
 
-    path('xboxBorrado/<int:pk>/', XboxDelete.as_view(), name='xbox_eliminar'),
-    path('switchBorrado/<int:pk>/', SwitchDelete.as_view(), name='switch_eliminar'),
-    path('ps4Borrado/<int:pk>/', Ps4Delete.as_view(), name='ps4_eliminar'),
-    path('pcBorrado/<int:pk>/', PcDelete.as_view(), name='pc_eliminar'),
-    path('otroBorrado/<int:pk>/', OtroDelete.as_view(), name='otro_eliminar'),
+    path('xboxBorrado/<int:pk>/', XboxDelete.as_view(), name='xboxborrado'),
+    path('switchBorrado/<int:pk>/', SwitchDelete.as_view(), name='switchborrado'),
+    path('ps4Borrado/<int:pk>/', Ps4Delete.as_view(), name='ps4borrado'),
+    path('pcBorrado/<int:pk>/', PcDelete.as_view(), name='pcborrado'),
+    path('otroBorrado/<int:pk>/', OtroDelete.as_view(), name='otroborrado'),
 
     path('juegocreacion/', JuegoCreacion.as_view(), name='juegocreacion'),
 

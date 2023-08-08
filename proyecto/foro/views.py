@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView, ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView 
 from django.contrib.auth.views import LoginView, PasswordChangeView, LogoutView
+from django.views.generic.detail import DetailView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -9,6 +10,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from .models import Consola, Comentario
 from .forms import FormularioRegistroUsuario, FormularioEdicion, FormularioNuevoJuego, ActualizacionJuego, FormularioComentario, FormularioCambioPassword
+from django.shortcuts import get_object_or_404
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -74,21 +77,30 @@ class XboxLista(LoginRequiredMixin, ListView):
 
 class XboxDetalle(LoginRequiredMixin, DetailView):
     model = Consola
-    context_object_name = 'xbox'
+    context_object_name = 'juego'
     template_name = 'xboxdetalle.html'
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Consola, pk=pk)
 
 class XboxUpdate(LoginRequiredMixin, UpdateView):
     model = Consola
     form_class = ActualizacionJuego
-    success_url = reverse_lazy('xbox')
+    success_url = reverse_lazy('listaxbox')
     context_object_name = 'xbox'
     template_name = 'xboxedicion.html'
 
 class XboxDelete(LoginRequiredMixin, DeleteView):
     model = Consola
-    success_url = reverse_lazy('xbox')
+    success_url = reverse_lazy('listaxbox')
     context_object_name = 'xbox'
     template_name = 'xboxborrado.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['juego'] = self.get_object() 
+        return context
 
 # switch
 
@@ -105,15 +117,20 @@ class SwitchDetalle(LoginRequiredMixin,DetailView):
 class SwitchUpdate(LoginRequiredMixin, UpdateView):
     model = Consola
     form_class = ActualizacionJuego
-    success_url = reverse_lazy('switch')
+    success_url = reverse_lazy('listaswitch')
     context_object_name = 'switch'
     template_name = 'switchedicion.html'
 
 class SwitchDelete(LoginRequiredMixin, DeleteView):
     model = Consola 
-    success_url = reverse_lazy('switch')
+    success_url = reverse_lazy('listaswitch')
     context_object_name = 'switch'
     template_name = 'switchborrado.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['juego'] = self.get_object() 
+        return context
 
 # ps4
 
@@ -130,15 +147,20 @@ class Ps4Detalle(LoginRequiredMixin, DetailView):
 class Ps4Update(LoginRequiredMixin, UpdateView):
     model = Consola
     form_class = ActualizacionJuego
-    success_url = reverse_lazy('ps4')
+    success_url = reverse_lazy('listaps4')
     context_object_name = 'ps4'
     template_name = 'ps4edicion.html'
 
 class Ps4Delete(LoginRequiredMixin, DeleteView):
     model = Consola
-    success_url = reverse_lazy('ps4')
+    success_url = reverse_lazy('listaps4')
     context_object_name = 'ps4'
     template_name = 'ps4borrado.html'
+ 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['juego'] = self.get_object() 
+        return context
 
 # pc
 
@@ -155,15 +177,20 @@ class PcDetalle(LoginRequiredMixin, DetailView):
 class PCUpdate(LoginRequiredMixin, UpdateView):
     model = Consola
     form_class = ActualizacionJuego
-    success_url = reverse_lazy('pc')
+    success_url = reverse_lazy('listapc')
     context_object_name = 'pc'
     template_name = 'pcedicion.html'
 
 class PcDelete(LoginRequiredMixin, DeleteView):
     model = Consola
-    success_url = reverse_lazy('pc')
+    success_url = reverse_lazy('listapc')
     context_object_name = 'pc'
     template_name = 'pcborrado.html'
+     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['juego'] = self.get_object() 
+        return context
 
 # otro
 
@@ -180,15 +207,20 @@ class OtroDetalle(LoginRequiredMixin, DetailView):
 class OtroUpdate(LoginRequiredMixin, UpdateView):
     model = Consola
     form_class = ActualizacionJuego
-    success_url = reverse_lazy('otros')
+    success_url = reverse_lazy('listaotros')
     context_object_name = 'otro'
     template_name = 'otroedicion.html'
 
 class OtroDelete(LoginRequiredMixin, DeleteView):
     model = Consola
-    success_url = reverse_lazy('otros')
+    success_url = reverse_lazy('listaotros')
     context_object_name = 'otro'
     template_name = 'otroborrado.html'
+     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['juego'] = self.get_object() 
+        return context
 
 # creacion juego
 
@@ -199,11 +231,11 @@ class JuegoCreacion(LoginRequiredMixin, CreateView):
     template_name = 'juegocreacion.html'
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.usuario = self.request.user
         response = super(JuegoCreacion, self).form_valid(form)
         return redirect(reverse_lazy('home'))
 
-# comentrio
+# comentario
 
 class ComentarioPagina(LoginRequiredMixin, CreateView):
     model = Comentario

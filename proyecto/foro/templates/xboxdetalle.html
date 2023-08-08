@@ -1,11 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    xbox detalle
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+
+<div class="container">
+    <p><h4>{{ juego.titulo }}</h4></p>
+    {% if juego.imagen %}
+        <p><img src="{{ juego.imagen.url }}" alt="" class="max-width-400"></p>
+    {% endif %}
+    {% if user.is_authenticated and user == juego.usuario %}
+        <div class="btn-group" role="group" aria-label="Botones de Acción">
+            <a href="{% url 'xboxedicion' juego.pk %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i> Editar</a>
+            <a href="{% url 'xboxborrado' juego.pk %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
+        </div>
+    {% endif %}
+    <hr>
+    <p>Consola: {{ juego.consola }}</p>
+    <p>Producto: {{ juego.producto }}</p>
+    <p>Descripción: {{ juego.descripcion }}</p>
+    <p>Año: {{ juego.año }}</p>
+    <p>Precio(US$): {{ juego.precio }}</p>
+</div>
+
+<br>
+<div class="container">
+    <h4>Comentarios...</h4>
+    <br>
+    <div class="container">
+        {% if not juego.comentarios.all %}
+            No hay comentarios para este juego
+        {% else %}
+            {% for comentario in juego.comentarios.all %}
+                <p><strong>{{ comentario.nombre }}</strong></p>
+                <p>{{ comentario.mensaje }}</p>
+                <p><small>{{ comentario.fechaComentario }}</small></p>
+                <hr>
+            {% endfor %}
+        {% endif %}
+        <a href="{% url 'comentario' juego.pk %}">Agrega un Comentario</a>
+    </div>
+</div>
+
+<style>
+    .max-width-400 {
+        max-width: 400px;
+    }
+</style>
+
+<br>
+{% endblock %}
