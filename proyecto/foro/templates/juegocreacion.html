@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container text-center">
+    <h1>Crea una Orden de Venta</h1>
+    <h3>Recomendamos dar una descripcion detallada a cerca del producto</h3>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Realizar Publicacion</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
