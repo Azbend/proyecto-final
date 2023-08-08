@@ -70,14 +70,14 @@ def password_exitoso(request):
 # xbox
 
 class XboxLista(LoginRequiredMixin, ListView):
-    context_object_name = 'juegos' 
+    context_object_name = 'xbox' 
     queryset = Consola.objects.filter(consola__startswith='xbox')
     template_name = 'listaxbox.html'
     login_url = '/login/'
 
 class XboxDetalle(LoginRequiredMixin, DetailView):
     model = Consola
-    context_object_name = 'juego'
+    context_object_name = 'xbox'
     template_name = 'xboxdetalle.html'
 
     def get_object(self, queryset=None):
@@ -99,7 +99,7 @@ class XboxDelete(LoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['juego'] = self.get_object() 
+        context['xbox'] = self.get_object() 
         return context
 
 # switch
@@ -142,7 +142,7 @@ class Ps4Lista(LoginRequiredMixin, ListView):
 class Ps4Detalle(LoginRequiredMixin, DetailView):
     model = Consola
     context_object_name = 'ps4'
-    template_name = 'ps4etalle.html'
+    template_name = 'ps4detalle.html'
 
 class Ps4Update(LoginRequiredMixin, UpdateView):
     model = Consola

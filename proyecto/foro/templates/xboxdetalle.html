@@ -6,22 +6,22 @@
 <br>
 
 <div class="container">
-    <p><h4>{{ juego.titulo }}</h4></p>
-    {% if juego.imagen %}
-        <p><img src="{{ juego.imagen.url }}" alt="" class="max-width-400"></p>
+    <p><h4>{{ xbox.titulo }}</h4></p>
+    {% if xbox.imagen %}
+        <p><img src="{{ xbox.imagen.url }}" alt="" class="max-width-400"></p>
     {% endif %}
-    {% if user.is_authenticated and user == juego.usuario %}
+    {% if user.is_authenticated and user == xbox.usuario %}
         <div class="btn-group" role="group" aria-label="Botones de Acción">
-            <a href="{% url 'xboxedicion' juego.pk %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i> Editar</a>
-            <a href="{% url 'xboxborrado' juego.pk %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
+            <a href="{% url 'xboxedicion' xbox.pk %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i> Editar</a>
+            <a href="{% url 'xboxborrado' xbox.pk %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
         </div>
     {% endif %}
     <hr>
-    <p>Consola: {{ juego.consola }}</p>
-    <p>Producto: {{ juego.producto }}</p>
-    <p>Descripción: {{ juego.descripcion }}</p>
-    <p>Año: {{ juego.año }}</p>
-    <p>Precio(US$): {{ juego.precio }}</p>
+    <p>Consola: {{ xbox.consola }}</p>
+    <p>Producto: {{ xbox.producto }}</p>
+    <p>Descripción: {{ xbox.descripcion }}</p>
+    <p>Año: {{ xbox.año }}</p>
+    <p>Precio(US$): {{ xbox.precio }}</p>
 </div>
 
 <br>
@@ -29,17 +29,17 @@
     <h4>Comentarios...</h4>
     <br>
     <div class="container">
-        {% if not juego.comentarios.all %}
-            No hay comentarios para este juego
+        {% if not xbox.comentarios.all %}
+            No hay comentarios para este producto
         {% else %}
-            {% for comentario in juego.comentarios.all %}
+            {% for comentario in xbox.comentarios.all %}
                 <p><strong>{{ comentario.nombre }}</strong></p>
                 <p>{{ comentario.mensaje }}</p>
                 <p><small>{{ comentario.fechaComentario }}</small></p>
                 <hr>
             {% endfor %}
         {% endif %}
-        <a href="{% url 'comentario' juego.pk %}">Agrega un Comentario</a>
+        <a href="{% url 'comentario' xbox.pk %}">Agrega un Comentario</a>
     </div>
 </div>
 

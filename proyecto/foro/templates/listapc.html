@@ -1,11 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    listapc
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+
+<div class="container text-center">
+    <h1>Lista de productos de PC</h1>
+</div>
+
+<br>
+
+<div class="container text-center">
+    <div class="row">
+        {% for juego in pc %}
+        <div class="col-md-4 align-items-center mb-4">
+            <div class="card-body">
+                <a href="{% url 'pcdetalle' juego.pk %}">
+                    <img src="{{ juego.imagen.url }}" class="" width="100px">
+                </a>
+                <br>
+                <a href="{% url 'pcdetalle' juego.pk %}">
+                    {{ juego.titulo }}
+                </a>
+                {% if user.id == juego.usuario.id %}
+                <a href="{% url 'pcedicion' juego.pk %}"><i class="bi bi-pencil-fill"></i></a>
+                <a href="{% url 'pcborrado' juego.pk %}"><i class="bi bi-trash text-danger"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
