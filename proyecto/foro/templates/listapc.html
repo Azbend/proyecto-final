@@ -23,10 +23,6 @@
                 <a href="{% url 'pcdetalle' juego.pk %}">
                     {{ juego.titulo }}
                 </a>
-                {% if user.id == juego.usuario.id %}
-                <a href="{% url 'pcedicion' juego.pk %}"><i class="bi bi-pencil-fill"></i></a>
-                <a href="{% url 'pcborrado' juego.pk %}"><i class="bi bi-trash text-danger"></i></a>
-                {% endif %}
             </div>
         </div>
         {% endfor %}

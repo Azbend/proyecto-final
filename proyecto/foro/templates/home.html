@@ -1,25 +1,35 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Página de Inicio{% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Bienvenido a Mi Sitio Web</h2>
+    <h2 class="text-center">Bienvenido a Consola House!</h2>
     
     <div class="row mt-4">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Publicación 1</h5>
-                    <p class="card-text">Contenido de la publicación 1.</p>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'juegocreacion' %}">
+                    {% else %}
+                    <a href="{% url 'login' %}">
+                    {% endif %}
+                    <h5 class="card-title text-center">Crear Publicación</h5>
+                    <p class="card-text text-center">Crea tu propia publicación para realizar una venta</p>
+                    <img src="{% static 'imagenes/pikachu dinero.jpg' %}" alt="Imagen" class="img-fluid mx-auto d-block" width="250" height="150">
+                </a>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Publicación 2</h5>
-                    <p class="card-text">Contenido de la publicación 2.</p>
+                    <a href="{% url 'lista' %}">
+                    <h5 class="card-title text-center">Explorar</h5>
+                    <p class="card-text text-center">Explora las publicaciones existentes para buscar productos de tu interés</p>
+                    <img src="{% static 'imagenes\pikachu buscar.jpg' %}" alt="Imagen" class="img-fluid mx-auto d-block" width="150" height="150">
+                </a>
                 </div>
             </div>
         </div>

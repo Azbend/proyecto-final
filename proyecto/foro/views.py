@@ -62,11 +62,43 @@ class UsuarioEdicion(UpdateView):
 class CambioPassword(PasswordChangeView):
     form_class = FormularioCambioPassword
     template_name = 'passwordcambio.html'
-    success_url = reverse_lazy('password_exitoso')
+    success_url = reverse_lazy('passwordexitoso')
 
 def password_exitoso(request):
     return render(request, 'passwordexitoso.html', {})
 
+class TodoLista(LoginRequiredMixin, ListView):
+    context_object_name = 'productos'
+    queryset = Consola.objects.all()
+    template_name = 'lista.html'
+    login_url = '/login/'
+
+class TodoDetalle(LoginRequiredMixin, DetailView):
+    model = Consola
+    context_object_name = 'productos'
+    template_name = 'detalle.html'
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Consola, pk=pk)
+
+class TodoUpdate(LoginRequiredMixin, UpdateView):
+    model = Consola
+    form_class = ActualizacionJuego
+    success_url = reverse_lazy('home')
+    context_object_name = 'productos'
+    template_name = 'edicion.html'
+
+class TodoDelete(LoginRequiredMixin, DeleteView):
+    model = Consola
+    success_url = reverse_lazy('home')
+    context_object_name = 'productos'
+    template_name = 'borrado.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['xbox'] = self.get_object() 
+        return context
 # xbox
 
 class XboxLista(LoginRequiredMixin, ListView):
