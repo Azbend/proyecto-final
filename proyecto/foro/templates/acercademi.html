@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merwebo</title>
-</head>
-<body>
-    compaaaaaaaaaaaaaaaaaaaa
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Acerca de Mí{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1 class="mb-4">Acerca de Mí</h1>
+            <img src="{% static 'imagenes/azben.png' %}" alt="Mi Foto" class="img-fluid rounded-circle mb-4" style="width: 200px;">
+            <p>Mi nombre es Arturo Ferraro y soy Contador Público, apasionado de los videojuegos y la tecnología. Desde joven he estado interesado en el mundo de los videojuegos y la música.</p>
+            <p>Me interesa aprender programación para en un futuro poder aplicarla en mi área laboral con el análisis de datos y en algún momento aprender acerca del desarrollo de videojuegos.</p>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6 text-center">
+            <a href="{% url 'home' %}" class="btn btn-primary">Regresar</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

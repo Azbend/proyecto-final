@@ -57,7 +57,7 @@ urlpatterns = [
     path('pcDetalle/<int:pk>/comentario/', ComentarioPagina.as_view(), name='comentario'),
     path('otroDetalle/<int:pk>/comentario/', ComentarioPagina.as_view(), name='comentario'),
 
-    path('acercademi/', views.about, name='acerca_de_mi'),
+    path('acercademi/', views.about, name='acercademi'),
 
     path('admin/', admin.site.urls),
 ]
