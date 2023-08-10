@@ -37,6 +37,10 @@ Si deseas contribuir a este proyecto, ¡estamos abiertos a tus aportes! Puedes c
 
 Si deseas ingresar como administrador, usar la terminacion /admin en el dominio e ingresar con el usuario admin123 y contraseña admin123
 
+## Video Demostrativo
+
+https://youtu.be/AHZ9kW4UaIE
+
 ## Créditos
 
 Desarrollado por Arturo Ferraro
